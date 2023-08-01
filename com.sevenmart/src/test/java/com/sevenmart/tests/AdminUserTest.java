@@ -14,39 +14,33 @@ import com.sevenmart.pages.LoginPage;
 public class AdminUserTest extends Base {
 	LoginPage loginpage;
 	AdminUserPage adminuserpage;
-	
-	@Test
-	public void user()
-	{
-		loginpage= new LoginPage(driver);
-		adminuserpage= new AdminUserPage(driver);
+
+	@Test(priority = 1)
+	public void user() {
+		loginpage = new LoginPage(driver);
+		adminuserpage = new AdminUserPage(driver);
 		loginpage.login();
-		String expectedUserName="mike1234";
-		String actualUserName=adminuserpage.verifyUser(expectedUserName);
+		String expectedUserName = "mike1234";
+		String actualUserName = adminuserpage.verifyUser(expectedUserName);
 		Assert.assertEquals(actualUserName, expectedUserName);
 	}
-	@Test(dataProvider="adminUserDetails",dataProviderClass = TestDataProviders.class)
-	public void createAdminUser(String userName,String password, String userType)
-	{
-		loginpage= new LoginPage(driver);
-		adminuserpage= new AdminUserPage(driver);
+
+	@Test(dataProvider = "adminUserDetails", dataProviderClass = TestDataProviders.class)
+	public void createAdminUser(String userName, String password, String userType) {
+		loginpage = new LoginPage(driver);
+		adminuserpage = new AdminUserPage(driver);
 		loginpage.login();
 		adminuserpage.createNewUser(userName, password, userType);
-		//adminuserpage.activateUser(userName);
+		// adminuserpage.activateUser(userName);
 	}
+
 	@Test()
-	public void deleteAdminUser()
-	{
-		loginpage= new LoginPage(driver);
-		adminuserpage= new AdminUserPage(driver);
+	public void deleteAdminUser() {
+		loginpage = new LoginPage(driver);
+		adminuserpage = new AdminUserPage(driver);
 		loginpage.login();
-		String expectedUserName="mike1234";
+		String expectedUserName = "mike1234";
 		adminuserpage.deleteUser(expectedUserName);
 	}
-	
-	
-	
-		 
-	
 
 }
