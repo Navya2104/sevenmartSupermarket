@@ -20,6 +20,6 @@ public class ManageTest extends Base{
 		String expectedCell_Content="vdj";
 		managepage.clickOnManageBox();
 		String actualCell_Content=managepage.getRequiredCellContent(expectedCell_Content);
-		Assert.assertEquals(actualCell_Content, expectedCell_Content);
+		Assert.assertEquals(actualCell_Content, expectedCell_Content,"alert msg");
 	}
 }
