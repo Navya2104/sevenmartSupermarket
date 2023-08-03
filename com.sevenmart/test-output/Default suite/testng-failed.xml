@@ -8,6 +8,7 @@
           <include name="terminateSession"/>
           <include name="deleteAdminUser"/>
           <include name="launchBrowser"/>
+          <include name="launchBrowser"/>
         </methods>
       </class> <!-- com.sevenmart.tests.AdminUserTest -->
     </classes>

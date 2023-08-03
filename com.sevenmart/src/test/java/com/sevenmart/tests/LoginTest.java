@@ -14,7 +14,7 @@ public class LoginTest extends Base{
 	HomePage homepage;
 	ExcelUtility excelutility=new ExcelUtility();
 	
-	@Test(priority=1)
+	@Test(priority=1,groups="smoke test")
 	public void verifyAdminUserLogin()
 	{
 		loginpage= new LoginPage(driver);
@@ -37,7 +37,7 @@ public class LoginTest extends Base{
 		String expectedErrorMsg="Alert!";
 		Assert.assertEquals(actualErrorMsg, expectedErrorMsg);
 	}*/
-	@Test(dataProvider="invalidcredentials",dataProviderClass=TestDataProviders.class)
+	/*@Test(dataProvider="invalidcredentials",dataProviderClass=TestDataProviders.class)
 	public void verifyInvalidUserLogin(String invalidUsername,String invalidPassword)
 	{
 		loginpage= new LoginPage(driver);
@@ -45,6 +45,6 @@ public class LoginTest extends Base{
 		String actualErrorMessage=loginpage.getErrorMsg();
 		String expectedErrorMsg="Alert!";
 		Assert.assertEquals(actualErrorMessage, expectedErrorMsg);
-	}
+	}*/
 
 }

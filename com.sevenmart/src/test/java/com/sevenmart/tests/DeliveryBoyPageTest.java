@@ -33,7 +33,7 @@ public class DeliveryBoyPageTest extends Base{
 		loginpage.login();
 		deliveryboypage.createDeliveryBoyField(name, mail, phoneNumber, address, userName, password);
 		String actualMessage=deliveryboypage.alertMessage();
-		Assert.assertEquals(actualMessage, expectedMessage);
+		Assert.assertEquals(actualMessage, expectedMessage,"error");
 		
 	}
 

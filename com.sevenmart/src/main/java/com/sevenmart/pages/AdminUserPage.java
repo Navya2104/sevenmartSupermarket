@@ -76,6 +76,7 @@ public class AdminUserPage {
 	{
 		clickOn_element(adminUserTab);
 		clickOn_element(newButton);
+		//newButton.submit();
 		enterAdminDetails(userName,password,userType);
 	}
 	public List<String> getCellContents()
@@ -119,7 +120,8 @@ public class AdminUserPage {
 		}
 		System.out.println(pos);
 		WebElement deleteButton=driver.findElement(By.xpath("//table/tbody/tr["+pos+"]/td[5]/a[3]"));
-		pageutility.scrollAndClickUsingArrowDown(deleteButton);
+		deleteButton.submit();
+		//pageutility.scrollAndClickUsingArrowDown(deleteButton);
 	}
 		
 }

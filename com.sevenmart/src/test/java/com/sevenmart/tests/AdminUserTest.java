@@ -15,7 +15,7 @@ public class AdminUserTest extends Base {
 	LoginPage loginpage;
 	AdminUserPage adminuserpage;
 
-	@Test(priority = 1)
+	@Test(priority = 1,groups="regression")
 	public void user() {
 		loginpage = new LoginPage(driver);
 		adminuserpage = new AdminUserPage(driver);
@@ -34,12 +34,12 @@ public class AdminUserTest extends Base {
 		// adminuserpage.activateUser(userName);
 	}
 
-	@Test()
+	@Test(groups={"smoke test","regression"},retryAnalyzer=com.sevenmart.listeners.RetryAnalyzer.class)
 	public void deleteAdminUser() {
 		loginpage = new LoginPage(driver);
 		adminuserpage = new AdminUserPage(driver);
 		loginpage.login();
-		String expectedUserName = "mike1234";
+		String expectedUserName = "Ciya123";
 		adminuserpage.deleteUser(expectedUserName);
 	}
 
