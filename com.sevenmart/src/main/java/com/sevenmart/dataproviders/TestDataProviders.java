@@ -19,8 +19,8 @@ public class TestDataProviders {
 
 	@DataProvider(name = "deliveryBoynames")
 	public Object[][] deliveryBoyNames() {
-		return new Object[][] { { "Navya", "navya@gmail.com", "12345", "house", "navya", "navya123", "Alert!" },
-				{ "dhanya", "dhanya@gmail.com", "123456", "house", "dhanyas", "dhanya123", "Alert!" } };
+		return new Object[][] { { "Navya", "navya@gmail.com", "12345", "house", "navya", "navya123", "1" },
+				{ "dhanya", "dhanya@gmail.com", "123456", "house", "dhanyas", "dhanya123", "1" } };
 	}
 
 	@DataProvider(name = "deliveryBoyProfileDetails")

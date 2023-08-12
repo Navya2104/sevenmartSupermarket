@@ -13,7 +13,7 @@ public class WaitUtility {
 		
 		WebDriver driver;
 		public static final long IMPLICIT_WAIT=10;
-		public static final long EXPLICIT_WAIT=20;
+		public static final long EXPLICIT_WAIT=5;
 		WebDriverWait wait;
 		
 		public WaitUtility(WebDriver driver)
@@ -36,10 +36,12 @@ public class WaitUtility {
 			wait=new WebDriverWait(driver,Duration.ofSeconds(EXPLICIT_WAIT));
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
 		}
-		public void waitForAlert()
+		public boolean waitForAlert()
 		{
 			wait=new WebDriverWait(driver,Duration.ofSeconds(EXPLICIT_WAIT));
 			wait.until(ExpectedConditions.alertIsPresent());
+			return true;
+					
 		}
 		public void waitForVisibility(By by)
 		{

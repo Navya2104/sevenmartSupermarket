@@ -9,13 +9,13 @@ public class PushNotificationPage {
 	WebDriver driver;
 	
 	@FindBy(xpath="(//a[@class=' nav-link'])[4]")
-	WebElement pushNoticationtField;
+	private WebElement pushNoticationtField;
 	@FindBy(id="title")
-	WebElement titleField;
+	private WebElement titleField;
 	@FindBy(id="description")
-	WebElement descriptionField;
+	private WebElement descriptionField;
 	@FindBy(xpath="//button[@name='create']")
-	WebElement signButton;
+	private WebElement signButton;
 	
 	public PushNotificationPage(WebDriver driver)
 	{

@@ -84,5 +84,18 @@ public class GeneralUtility {
 		String timeStamp = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss").format(new Date());
 		return timeStamp;
 	}
+	public int positionOfUser(List<String>elements, String element)
+	{
+		int pos=0;
+		for(pos=0;pos<elements.size();pos++)
+		{
+			if(element.equals(elements.get(pos)))
+			{
+				pos++;
+				break;
+			}
+		}
+		return pos;
+	}
 	
 }

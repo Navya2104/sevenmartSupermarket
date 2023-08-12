@@ -18,37 +18,39 @@ public class DeliveryBoyPage {
 	PageUtility pageutility;
 	GeneralUtility generalutility;
 	
-	@FindBy(xpath="(//a[@class=' nav-link'])[8]")
-	WebElement deliveryBoyButton;
+	@FindBy(xpath="//ul[@role='menu']/li[13]")
+	private WebElement deliveryBoyButton;
 	@FindBy(xpath="//a[@onclick='click_button(1)']")
-	WebElement newButton;
+	private WebElement newButton;
 	@FindBy(xpath="//div[@class='col-md-12']/div/input")
-	List<WebElement> inputFields;
+	private List<WebElement> inputFields;
 	@FindBy(id="name")
-	WebElement nameField;
+	private WebElement nameField;
 	@FindBy(id="email")
-	WebElement mailField;
+	private WebElement mailField;
 	@FindBy(id="phone")
-	WebElement phoneField;
+	private WebElement phoneField;
 	@FindBy(id="username")
-	WebElement userNameField;
+	private WebElement userNameField;
 	@FindBy(id="password")
-	WebElement passwordField;
+	private WebElement passwordField;
 	@FindBy(id="address")
-	WebElement addressField;
+	private WebElement addressField;
 	@FindBy(xpath="//button[text()='Save']")
-	WebElement saveButton;
+	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='row-sm-12']/div/h5")
-	WebElement successAlert;
+	private WebElement successAlert;
+	@FindBy(xpath="//table/tbody/tr/td[5]")
+	private List<WebElement> userNames;
 	
 	public DeliveryBoyPage(WebDriver driver)
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
-	public void clickon_ManageDeliveryBoy()
+	public void clickOn_element(WebElement element)
 	{
-		deliveryBoyButton.click();
+		element.click();
 	}
 	public void enterInputFields(String name,String mail,String phoneNumber,String address,String userName,String password)
 	{
@@ -65,22 +67,36 @@ public class DeliveryBoyPage {
 		pageutility= new PageUtility(driver);
 		pageutility.clickButton(saveButton);
 	}
-	public void createDeliveryBoyField(String name,String mail,String phoneNumber,String address,String userName,String password)
+	public String createDeliveryBoyField(String name,String mail,String phoneNumber,String address,String userName,String password)
 	{
 		pageutility= new PageUtility(driver);
 		waitutility=new WaitUtility(driver);
-		clickon_ManageDeliveryBoy();
+		generalutility=new GeneralUtility(driver);
+		clickOn_element(deliveryBoyButton);
 		enterInputFields(name, mail, phoneNumber, address, userName, password);
 		pageutility.scrollDown(saveButton);
 		waitutility.waitForClickable(saveButton);
 		clickonSaveButton();
+		List<String> names=new ArrayList<String>();
+		names=generalutility.getTextOfElements(userNames);
+		int position=generalutility.positionOfUser(names,name);
+		String pos=Integer.toString(position);
+		return pos;
 	}
-	public String alertMessage()
+	public String verifyAndEditUser(String expectedUserName) {
+		
+		return null;
+	}
+	public String verifyUser(String name)
 	{
 		generalutility=new GeneralUtility(driver);
-		return generalutility.getTextOfElement(successAlert);
+		clickOn_element(deliveryBoyButton);
+		List<String>names=new ArrayList<String>();
+		names=generalutility.getTextOfElements(userNames);
+		int position=generalutility.positionOfUser(names,name);
+		return name;
+		
 	}
-	
 	
 	
 	

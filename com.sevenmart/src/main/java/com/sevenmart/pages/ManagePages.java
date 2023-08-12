@@ -17,9 +17,9 @@ public class ManagePages {
 	GeneralUtility generalutility;
 	
 	@FindBy(xpath="//div[@class='inner']/p[text()='Manage Pages']")
-	WebElement manageBox;
+	private WebElement manageBox;
 	@FindBy(xpath="//table/tbody//tr//td[1]")
-	List<WebElement> listFirstCellContents;
+	private List<WebElement> listFirstCellContents;
 	By arrowButton=By.xpath("//a[@class='small-box-footer']");
 	
 	public ManagePages(WebDriver driver)

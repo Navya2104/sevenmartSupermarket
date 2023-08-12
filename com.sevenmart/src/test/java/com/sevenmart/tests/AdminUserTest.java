@@ -10,6 +10,7 @@ import com.sevenmart.dataproviders.TestDataProviders;
 import com.sevenmart.pages.AdminUserPage;
 import com.sevenmart.pages.DeliveryBoyPage;
 import com.sevenmart.pages.LoginPage;
+import com.sevenmart.utilities.GeneralUtility;
 
 public class AdminUserTest extends Base {
 	LoginPage loginpage;
@@ -20,9 +21,9 @@ public class AdminUserTest extends Base {
 		loginpage = new LoginPage(driver);
 		adminuserpage = new AdminUserPage(driver);
 		loginpage.login();
-		String expectedUserName = "mike1234";
+		String expectedUserName = "Thara";
 		String actualUserName = adminuserpage.verifyUser(expectedUserName);
-		Assert.assertEquals(actualUserName, expectedUserName);
+		Assert.assertEquals(actualUserName, expectedUserName,"user is not found");
 	}
 
 	@Test(dataProvider = "adminUserDetails", dataProviderClass = TestDataProviders.class)
@@ -30,8 +31,10 @@ public class AdminUserTest extends Base {
 		loginpage = new LoginPage(driver);
 		adminuserpage = new AdminUserPage(driver);
 		loginpage.login();
-		adminuserpage.createNewUser(userName, password, userType);
-		// adminuserpage.activateUser(userName);
+		int expectedPosition=1;
+		int actualPosition=adminuserpage.createNewUser(userName+" "+GeneralUtility.getRandomName(), password, userType);
+		Assert.assertEquals(actualPosition, expectedPosition,"user is not created");
+		
 	}
 
 	@Test(groups={"smoke test","regression"},retryAnalyzer=com.sevenmart.listeners.RetryAnalyzer.class)
@@ -39,8 +42,10 @@ public class AdminUserTest extends Base {
 		loginpage = new LoginPage(driver);
 		adminuserpage = new AdminUserPage(driver);
 		loginpage.login();
-		String expectedUserName = "Ciya123";
-		adminuserpage.deleteUser(expectedUserName);
+		String expectedUserName = "tomika.sanford";
+		boolean value=adminuserpage.deleteUser(expectedUserName);
+		Assert.assertEquals(value, true,"user is not deleted");
+		
 	}
 
 }
