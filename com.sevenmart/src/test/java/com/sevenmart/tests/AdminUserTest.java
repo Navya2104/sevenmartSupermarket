@@ -48,7 +48,7 @@ public class AdminUserTest extends Base {
 		excelutility.SetExcelFile("adminProfileData", "deleteDetails");
 		String expectedUserName =excelutility.getCellData(0, 0);
 		boolean value=adminuserpage.deleteUser(expectedUserName);
-		Assert.assertEquals(value, true,"user is not deleted");
+		Assert.assertEquals(value, true,"user is not deleted.check");
 		
 	}
 
