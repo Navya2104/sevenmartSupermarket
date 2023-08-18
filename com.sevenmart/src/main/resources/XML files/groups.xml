@@ -7,7 +7,7 @@
 	<test name="regression testcases">
 		<groups>
 			<run>
-				<include name="smoke test"></include>
+				<include name="smoke"></include>
 			</run>
 		</groups>
 		<classes>

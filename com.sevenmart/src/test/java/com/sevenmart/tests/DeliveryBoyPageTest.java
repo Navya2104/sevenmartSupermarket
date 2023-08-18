@@ -7,21 +7,24 @@ import com.sevenmart.base.Base;
 import com.sevenmart.dataproviders.TestDataProviders;
 import com.sevenmart.pages.DeliveryBoyPage;
 import com.sevenmart.pages.LoginPage;
+import com.sevenmart.utilities.ExcelUtility;
 import com.sevenmart.utilities.GeneralUtility;
 import com.sevenmart.utilities.PageUtility;
 
 public class DeliveryBoyPageTest extends Base{
 	DeliveryBoyPage deliveryboypage;
 	LoginPage loginpage;
+	ExcelUtility excelutility=new ExcelUtility();
 	
 	
-	@Test(dataProvider="deliveryBoynames",dataProviderClass = TestDataProviders.class)
+	@Test(groups={"smoke"},dataProvider="deliveryBoynames",dataProviderClass = TestDataProviders.class)
 	public void verifyDeliveryBoyNameAdded(String name,String mail,String phoneNumber,String address,String userName,String password,String expectedPosition)
 	{
 		loginpage= new LoginPage(driver);
 		deliveryboypage= new DeliveryBoyPage(driver);
 		loginpage.login();
-		String actualPosition=deliveryboypage.createDeliveryBoyField(name, mail, phoneNumber, address, userName+" "+GeneralUtility.getRandomName(), password);
+		String uniqueUserName=userName+" "+GeneralUtility.getRandomName();
+		String actualPosition=deliveryboypage.createDeliveryBoyField(name, mail, phoneNumber, address, uniqueUserName, password);
 		Assert.assertEquals(actualPosition, expectedPosition,"deliveryBoy is not created");
 		
 	}
@@ -31,7 +34,8 @@ public class DeliveryBoyPageTest extends Base{
 		loginpage= new LoginPage(driver);
 		deliveryboypage= new DeliveryBoyPage(driver);
 		loginpage.login();
-		String expectedUserName = "anu";
+		excelutility.SetExcelFile("manageDeliveryBoyData", "verifyDetails");
+		String expectedUserName = excelutility.getCellData(0, 0);
 		String actualUserName = deliveryboypage.verifyUser(expectedUserName);
 		Assert.assertEquals(actualUserName, expectedUserName,"user is not found");
 	}

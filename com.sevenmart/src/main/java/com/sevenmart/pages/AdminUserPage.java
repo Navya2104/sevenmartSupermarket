@@ -18,7 +18,6 @@ import com.sevenmart.utilities.WaitUtility;
 public class AdminUserPage {
 	WebDriver driver;
 	GeneralUtility generalutility;
-	Select select;
 	PageUtility pageutility;
 	WaitUtility waitutility;
 	
@@ -49,26 +48,12 @@ public class AdminUserPage {
 	}
 	public void enterAdminDetails(String username,String password,String userType)
 	{
+		pageutility=new PageUtility(driver);
 		userNameField.sendKeys(username);
 		passwordField.sendKeys(password);
 		clickOn_element(userTypeField);
-		select=new Select(userTypeField);
-		if(userType.equals("Staff"))
-		{
-		select.selectByIndex(1);
-		}
-		if(userType.equals("Admin"))
-		{
-		select.selectByIndex(2);
-		}
-		if(userType.equals("Partner"))
-		{
-		select.selectByIndex(3);
-		}
-		if(userType.equals("Delivery Boy"))
-		{
-		select.selectByIndex(4);
-		}
+		int option=Integer.parseInt(userType);
+		pageutility.select_ByIndex(userTypeField, option);
 		clickOn_element(saveButton);
 		
 	}

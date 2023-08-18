@@ -55,7 +55,7 @@ public class GeneralUtility {
 	}
 	public String get_cssValue(WebElement element, String cssValue)
 	{
-		return element.getAttribute(cssValue);
+		return element.getCssValue(cssValue);
 	}
 	public Boolean is_Displayed(WebElement element)
 	{
@@ -95,7 +95,15 @@ public class GeneralUtility {
 				break;
 			}
 		}
-		return pos;
+		if(pos==20)
+		{
+			pos=50;
+			return pos;
+		}
+		else
+		{
+			return pos;
+		}
 	}
 	
 }

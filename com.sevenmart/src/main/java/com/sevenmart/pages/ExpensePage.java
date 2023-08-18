@@ -10,10 +10,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.sevenmart.utilities.GeneralUtility;
+import com.sevenmart.utilities.PageUtility;
+import com.sevenmart.utilities.WaitUtility;
 
 public class ExpensePage {
 	WebDriver driver;
 	GeneralUtility generalutility;
+	PageUtility pageutility;
+	WaitUtility waitutility;
 	
 	@FindBy (xpath="(//a[@class='nav-link'])[5]")
 	private WebElement manageExpenseField;
@@ -27,6 +31,8 @@ public class ExpensePage {
 	private WebElement saveButton;
 	@FindBy(xpath="//table/tbody/tr/td[1]")
 	private List<WebElement>expenseListField;
+	@FindBy(xpath="//input[@name='name']")
+	private WebElement nameField;
 	
 	public ExpensePage(WebDriver driver)
 	{
@@ -37,51 +43,56 @@ public class ExpensePage {
 	{
 		element.click();
 	}
-	public String createExpenseCategory()
+	public boolean verify_Field(String name)
 	{
+		List<String> names=new ArrayList<String>();
+		names=generalutility.getTextOfElements(expenseListField);
+		int position=generalutility.positionOfUser(names, name);
+		if((position>0)&&(position<40))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean createExpenseCategory(String randomName)
+	{
+		generalutility= new GeneralUtility(driver);
 		clickon_element(manageExpenseField);
 		clickon_element(expenseCategory_check);
 		clickon_element(newButton);
-		String randomName=GeneralUtility.getRandomName();
 		titleField.sendKeys(randomName);
 		clickon_element(saveButton);
-		return randomName;
-	
+		boolean value=verify_Field(randomName);
+		return value;
 	}
 	public boolean verifyExpenseCategory(String name)
 	{
 		generalutility=new GeneralUtility(driver);
-		List<String> names=new ArrayList<String>();
-		names=generalutility.getTextOfElements(expenseListField);
-		int i;
-		for(i=0;i<expenseListField.size();i++)
-		{
-			if(name.equals(names.get(i)))
-			{
-				i++;
-				break;
-			}
-		}
-		
-		return true;
+		clickon_element(manageExpenseField);
+		clickon_element(expenseCategory_check);
+		boolean value=verify_Field(name);
+		return value;
 	}
-	public void deleteExpenseEntry(String name)
+	public boolean deleteExpenseEntry(String name)
 	{ 
 		generalutility=new GeneralUtility(driver);
+		pageutility=new PageUtility(driver);
+		waitutility= new WaitUtility(driver);
+		clickon_element(manageExpenseField);
+		clickon_element(expenseCategory_check);
 		List<String> names=new ArrayList<String>();
 		names=generalutility.getTextOfElements(expenseListField);
-		int i;
-		for(i=0;i<expenseListField.size();i++)
+		int position=generalutility.positionOfUser(names, name);
+		WebElement deleteButton=driver.findElement(By.xpath("//table/tbody/tr["+position+"]/td[2]/a[2]"));
+		pageutility.scrollAndClickUsingArrowDown(deleteButton);
+		if(waitutility.waitForAlert()==true)
 		{
-			if(name.equals(names.get(i)))
-			{
-				i++;
-				break;
-			}
+			pageutility.acceptAlert();
+			
 		}
-		System.out.println(i);
-		WebElement deleteButton=driver.findElement(By.xpath("//table/tbody/tr["+i+"]/td[2]/a[2]"));
-		deleteButton.submit();
+		boolean value=verify_Field(name);
+		return value;
 	}
 	
 

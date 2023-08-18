@@ -29,6 +29,7 @@ public class LoginPage {
 	private WebElement rememberMeButton;
 	@FindBy (xpath="//div[@class='alert alert-danger alert-dismissible']/h5")
 	private WebElement errormsgfield;
+
 	
 	public LoginPage(WebDriver driver)
 	{
@@ -78,10 +79,7 @@ public class LoginPage {
 		
 		enterUserName(username);
 		enterPassword(password);
-		
-		clickonSignButton();
-		
-		
+		clickonSignButton();	
 			
 	}
 }

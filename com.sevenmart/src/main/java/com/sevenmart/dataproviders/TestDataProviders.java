@@ -9,7 +9,7 @@ public class TestDataProviders {
 
 	@DataProvider(name = "invalidcredentials")
 	public Object[][] invalid_Credentials() {
-		return new Object[][] { { "s22", "eddifice" }, { "case", "tv" } };
+		return new Object[][] { { "admina", "adm","Alert!" }, { "case", "tv","Alert!" } };
 	}
 
 	@DataProvider(name = "validCredentials")
@@ -32,7 +32,19 @@ public class TestDataProviders {
 	@DataProvider(name = "adminUserDetails")
 	public Object[][] adminUserDetails() {
 		excelutility.SetExcelFile("adminProfileData", "adminProfileDetails");
+		Object data[][] = excelutility.getMultiDimensionalData(3, 4);
+		return data;
+	}
+	@DataProvider(name = "manageContentDetails")
+	public Object[][] amanageContentDetails() {
+		excelutility.SetExcelFile("manageContentData", "manageContentDetails");
 		Object data[][] = excelutility.getMultiDimensionalData(3, 3);
+		return data;
+	}
+	@DataProvider(name = "pushNotificationDetails")
+	public Object[][] pushNotificationDetails() {
+		excelutility.SetExcelFile("pushNotificationData", "pushMsg");
+		Object data[][] = excelutility.getMultiDimensionalData(2, 3);
 		return data;
 	}
 	

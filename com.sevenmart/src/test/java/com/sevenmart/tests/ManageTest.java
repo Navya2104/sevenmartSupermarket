@@ -4,22 +4,38 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.sevenmart.base.Base;
+import com.sevenmart.dataproviders.TestDataProviders;
 import com.sevenmart.pages.LoginPage;
 import com.sevenmart.pages.ManagePages;
+import com.sevenmart.utilities.ExcelUtility;
+import com.sevenmart.utilities.GeneralUtility;
 
 public class ManageTest extends Base{
 	ManagePages managepage;
 	LoginPage loginpage;
+	ExcelUtility excelutility=new ExcelUtility();
 	
-	@Test
-	public void verifyTableFirstCell()
+	@Test(dataProvider = "manageContentDetails",dataProviderClass = TestDataProviders.class)
+	public void addField_ContentPage(String title, String page,String path)
 	{
 		managepage=new ManagePages(driver);
 		loginpage= new LoginPage(driver);
 		loginpage.login();
-		String expectedCell_Content="vdj";
-		managepage.clickOnManageBox();
-		String actualCell_Content=managepage.getRequiredCellContent(expectedCell_Content);
-		Assert.assertEquals(actualCell_Content, expectedCell_Content,"alert msg");
+		boolean actualValue=managepage.addCellContent(title, page+" "+GeneralUtility.getRandomName(), path);
+		Assert.assertEquals(actualValue, true,"content not created");
+	
+	}
+	@Test
+	public void deleteAndVerifyField_ContentPage()
+	{
+		managepage=new ManagePages(driver);
+		loginpage= new LoginPage(driver);
+		loginpage.login();
+		excelutility.SetExcelFile("manageContentData", "deleteContentDetails");
+		String expectedContent =excelutility.getCellData(0, 0);
+		boolean actualContent=managepage.deleteCellContent(expectedContent);
+		Assert.assertEquals(actualContent, false,"Content field not deleted");
+		
+		
 	}
 }

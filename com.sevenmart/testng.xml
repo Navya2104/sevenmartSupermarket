@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<listeners>
+		<listener class-name="com.sevenmart.listeners.ExtentReporter"></listener>
+	</listeners>
+	<test thread-count="5" name="Test">
+		<classes>
+			<class name="com.sevenmart.tests.ExpenseTest" />
+			<class name="com.sevenmart.tests.DeliveryBoyPageTest" />
+			<class name="com.sevenmart.tests.LoginTest" >
+			<methods>
+				<exclude name="verifyInvalidUserLogin"></exclude>
+			</methods>
+			</class>
+			<class name="com.sevenmart.tests.ManageTest" />
+			<class name="com.sevenmart.tests.PushNotificationTest" />
+			<class name="com.sevenmart.tests.AdminUserTest" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

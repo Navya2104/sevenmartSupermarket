@@ -105,7 +105,7 @@ public class PageUtility {
 			Robot robot=new Robot();
 			while(isNotClicked(element))
 			 {
-				robot.keyPress(KeyEvent.VK_DOWN);//down arrown
+				robot.keyPress(KeyEvent.VK_DOWN);
 				robot.keyRelease(KeyEvent.VK_DOWN);
 			 }
 			

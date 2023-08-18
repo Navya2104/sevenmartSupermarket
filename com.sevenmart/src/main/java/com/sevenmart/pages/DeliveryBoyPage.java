@@ -79,22 +79,27 @@ public class DeliveryBoyPage {
 		clickonSaveButton();
 		List<String> names=new ArrayList<String>();
 		names=generalutility.getTextOfElements(userNames);
-		int position=generalutility.positionOfUser(names,name);
+		int position=generalutility.positionOfUser(names,userName);
 		String pos=Integer.toString(position);
 		return pos;
 	}
-	public String verifyAndEditUser(String expectedUserName) {
-		
-		return null;
-	}
-	public String verifyUser(String name)
+	
+	public String verifyUser(String expectedName)
 	{
 		generalutility=new GeneralUtility(driver);
 		clickOn_element(deliveryBoyButton);
 		List<String>names=new ArrayList<String>();
 		names=generalutility.getTextOfElements(userNames);
-		int position=generalutility.positionOfUser(names,name);
-		return name;
+		String actualName=" ";
+		for(String name:names)
+		{
+			if(expectedName.equals(name))
+			{
+				actualName=name;
+				break;
+			}
+		}
+		return actualName;
 		
 	}
 	
