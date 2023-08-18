@@ -36,7 +36,7 @@ public class AdminUserTest extends Base {
 		loginpage.login();
 		int expectedPosition=Integer.parseInt(position);
 		int actualPosition=adminuserpage.createNewUser(userName+" "+GeneralUtility.getRandomName(), password, userType);
-		Assert.assertEquals(actualPosition, expectedPosition,"user is not created");
+		Assert.assertEquals(actualPosition, expectedPosition,"user is not created.check");
 		
 	}
 
